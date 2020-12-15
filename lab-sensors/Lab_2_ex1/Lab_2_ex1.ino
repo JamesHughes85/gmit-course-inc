@@ -1,3 +1,4 @@
+//Lab_2 ex1
 
 // constants won't change. They're used here to set pin numbers:
 const int buttonPin = 2;     // the number of the pushbutton pin

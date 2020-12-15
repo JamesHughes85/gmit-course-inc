@@ -1,3 +1,4 @@
+
 //Lab_2 - Exercise 4 
 
 const int numReadings = 10;
