@@ -1,14 +1,13 @@
+//Lab_2 - Exercise 4 
 
-
-//Lab 2 Exercise 3 - Smoothing
 const int numReadings = 10;
-
 int readings[numReadings];      // the readings from the analog input
 int readIndex = 0;              // the index of the current reading
 int total = 0;                  // the running total
 int average = 0;                // the average
-
 int inputPin = A0;
+long timeNow = 0;
+long timer = 0;
 
 void setup() {
   // initialize serial communication with computer:
@@ -18,8 +17,13 @@ void setup() {
     readings[thisReading] = 0;
   }
 }
-
 void loop() {
+  timeNow = millis();//Hold the millisecond timer for now
+  if((timeNow-timer)>=200)
+  {
+  timer = timeNow;
+  Serial.println(timeNow);}
+  
   // subtract the last reading:
   total = total - readings[readIndex];
   // read from the sensor:
