@@ -1,28 +1,25 @@
-#define PIN_LED1 3
+// JAMES HUGHES - INSTRUMENTATION AND CONTROL - LAB 5
+
 #define PIN_SENSOR A1
 #define PIN_SERVO 9
-# include<Servo.h>
 
-servoActuator testServo(PIN_SERVO,50);
+depthSensor depth = depthSensor(PIN_SENSOR,1000);
+servoActuator ServMo = servoActuator (PIN_SERVO,1);
 
-depthSensor depth = depthSensor(PIN_SENSOR );
 
-Servo myservo;
 int depthSensor = 0;
 int val;
 
 void setup() {
-  myservo.attach (9);
 Serial.begin(9600);//open the serial port at 9600 bps:
 }
 
 void loop() {
-  val = analogRead(depthSensor);
-  val = map(val,0,1023,0,180);
-  myservo.write(val);
-  delay(200);
-  
-  depth.check();
-  Serial.print(depth.getValue());
-  Serial.print("\n ");
+  depth.DataConvert();
+
+//Prints out the resulting voltage and analog readings to the screen on the serial monitor
+  Serial.print("Voltage :"); Serial.print(depth.getvoltage());
+  Serial.println(" ");Serial.print("Analog reading :");Serial.print(depth.getsensorValue()); Serial.print(" ");
+  //calls servo motor control using depth sensor values
+  ServMo.ServoAngle(depth.getsensorValue());
 }
